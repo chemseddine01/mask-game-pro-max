@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://co0kxnd7cf0jd"]
+[gd_scene load_steps=7 format=3 uid="uid://co0kxnd7cf0jd"]
 
 [ext_resource type="Script" uid="uid://b3rgimylxwpx6" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://gvmcnys2ihwb" path="res://crosshair.png" id="2_g2els"]
+[ext_resource type="Script" uid="uid://cx8fkoo6vyryl" path="res://player/control.gd" id="3_qhqgy"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u8vuu"]
 
@@ -35,3 +36,33 @@ target_position = Vector3(0, 0, -24.975)
 position = Vector2(576, 324)
 scale = Vector2(0.865, 0.865)
 texture = ExtResource("2_g2els")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_qhqgy")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 19.0
+offset_right = 73.0
+offset_bottom = 42.0
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 55.0
+offset_right = 72.0
+offset_bottom = 78.0
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 89.0
+offset_right = 73.0
+offset_bottom = 112.0

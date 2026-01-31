@@ -33,12 +33,13 @@ func _physics_process(_delta: float) -> void:
 		velocity.x = 0
 		velocity.z = 0
 	move_and_slide()
-	
+
+
 
 
 func _on_timer_timeout() -> void:
 	dir = randi_range(0,9)
-
+	print(health)
 
 func enemy_hit(damage):
 	health -= damage
