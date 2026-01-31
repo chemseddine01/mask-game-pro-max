@@ -1,7 +1,9 @@
 extends CharacterBody3D
 @onready var head: Node3D = $head
 @onready var camera: Camera3D = $head/Camera3D
+@onready var ray: RayCast3D = $head/Camera3D/RayCast3D
 
+var damage = 10
 var speed = 5
 var JUMP_VELOCITY = 4
 var sensetivity = 0.004
@@ -17,15 +19,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	# Handle shooting
+	if Input.is_action_just_pressed("shoot"):
+		shoot()
 	
-
-		
-	
-	
-#	change_color()
-	# Check zombie health after modification
-
-	# Add the gravity
 	if !is_on_floor():
 		velocity += get_gravity() * delta
 	
@@ -49,3 +45,11 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 	move_and_slide()
+
+
+func shoot():
+	if ray.is_colliding():
+		var target = ray.get_collider()
+		if target != null:
+			if target.is_in_group("enemy") and target.has_method("enemy_hit"):
+				target.enemy_hit(damage)
