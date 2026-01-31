@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://b3rgimylxwpx6" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://gvmcnys2ihwb" path="res://crosshair.png" id="2_g2els"]
-[ext_resource type="Script" uid="uid://cx8fkoo6vyryl" path="res://player/control.gd" id="3_qhqgy"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u8vuu"]
 
@@ -10,6 +9,14 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_3vyb7"]
 size = Vector3(0.05, 0.425, 0.44)
+
+[sub_resource type="GDScript" id="GDScript_oul6g"]
+script/source = "extends Control
+
+
+func _process(_delta: float) -> void:
+	$Label.text = \"FPS \"  + str(Engine.get_frames_per_second())
+"
 
 [node name="player" type="CharacterBody3D"]
 script = ExtResource("1_3vyb7")
@@ -44,7 +51,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("3_qhqgy")
+script = SubResource("GDScript_oul6g")
 
 [node name="Label" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 0
