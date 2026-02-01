@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://brersgn1wdyo7"]
+[gd_scene load_steps=12 format=3 uid="uid://brersgn1wdyo7"]
 
 [ext_resource type="Texture2D" uid="uid://c4j5pxsccge0y" path="res://floor_texture.png" id="1_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://co0kxnd7cf0jd" path="res://scenes/player.tscn" id="2_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://dyclkrluge1mn" path="res://scenes/enemy.tscn" id="3_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://b0vweaph64yog" path="res://scenes/radom_spawning.tscn" id="4_k0juu"]
+[ext_resource type="PackedScene" uid="uid://cliyc1xvho5xb" path="res://scenes/second_world_enemy.tscn" id="5_71j4m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rwgxs"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -54,3 +55,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.691612, 1.6144643, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.71502, 0)
 
 [node name="radom_spawning" parent="player" instance=ExtResource("4_k0juu")]
+
+[node name="second_world_enemy" parent="." instance=ExtResource("5_71j4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.017361164, 2.3235493, -6.845666)

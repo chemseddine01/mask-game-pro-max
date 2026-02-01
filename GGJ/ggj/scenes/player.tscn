@@ -18,7 +18,7 @@ func _process(_delta: float) -> void:
 	$Label.text = \"FPS \"  + str(Engine.get_frames_per_second())
 "
 
-[node name="player" type="CharacterBody3D"]
+[node name="player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_3vyb7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

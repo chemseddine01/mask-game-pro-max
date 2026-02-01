@@ -20,7 +20,15 @@ var target_sway := 0.0
 @export var fov_change: float = 1.5
 
 
+
+# kill settings
+var kill_amount = Game.kills
+
+
+# ray settings
 @onready var ray: RayCast3D = $head/Camera3D/RayCast3D
+
+
 @onready var head: Node3D = $head
 @onready var camera: Camera3D = $head/Camera3D
 @onready var initial_camera_pos: Vector3 = camera.position
@@ -44,7 +52,10 @@ func _physics_process(delta):
 	# الجاذبية
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-				
+	
+	if Input.is_action_just_pressed("shoot"):
+		shoot()
+	first_world()
 # يصفر مكانه جوه الإيد
 	
 	# القفز
@@ -134,21 +145,33 @@ func _update_fov(delta):
 		walk_speed = 200.0
 		sprint_speed = 300.0
 
-	if is_on_wall() and Input.is_action_just_pressed("jump*") and double_jump == 1 :
+	if is_on_wall() and Input.is_action_just_pressed("jump") and double_jump == 1 :
 		velocity.y = 5
 		double_jump = 0
 		await get_tree().create_timer(3).timeout
 		double_jump = 1
-	
+
 	if is_on_wall() :
 		$CanvasLayer/Control/Label3.text = "Is on Wall"
 	else:
-		$CanvasLayer/Control/Label3.text = "Is on not Wall"
+		$CanvasLayer/Control/Label3.text = "Is not no Wall"
 
 
 func shoot():
 	if ray.is_colliding():
 		var target = ray.get_collider()
 		if target != null:
-			if target.is_in_group("enemy") and target.has_method("enemy_hit"):
-				target.enemy_hit(damage)
+			if target.is_in_group("casual_enemy") and target.has_method("casual_enemy_hit"):
+				target.casual_enemy_hit(damage)
+			elif target.has_method("first_world_enemy_hit"):
+				target.first_world_enemy_hit(damage)
+
+func first_world():
+	if ray.is_colliding():
+		var target = ray.get_collider()
+		if target != null:
+			if target.has_method("visibility"):
+				target.visibility(Game.first_mask)
+	if Game.kills >= 2:
+		Game.first_mask = true
+		print("now you can see the enemys")
