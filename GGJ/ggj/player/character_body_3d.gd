@@ -6,7 +6,6 @@ extends CharacterBody3D
 @export var jump_velocity: float = 4.5
 @export var mouse_sensitivity: float = 0.1
 
-
 ## إعدادات Head Bobbing
 @export var bob_frequency: float = 2.0        # تردد الاهتزاز
 @export var bob_amplitude: float = 0.08   # مدى الاهتزاز
@@ -19,12 +18,9 @@ var target_sway := 0.0
 @export var base_fov: float = 75.0
 @export var fov_change: float = 1.5
 
-
-@onready var ray: RayCast3D = $head/Camera3D/RayCast3D
 @onready var head: Node3D = $head
 @onready var camera: Camera3D = $head/Camera3D
 @onready var initial_camera_pos: Vector3 = camera.position
-var damage = 10
 var double_jump = 1
 var current_speed: float = walk_speed
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -46,7 +42,6 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 				
 # يصفر مكانه جوه الإيد
-	
 	# القفز
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
@@ -144,11 +139,3 @@ func _update_fov(delta):
 		$CanvasLayer/Control/Label3.text = "Is on Wall"
 	else:
 		$CanvasLayer/Control/Label3.text = "Is on not Wall"
-
-
-func shoot():
-	if ray.is_colliding():
-		var target = ray.get_collider()
-		if target != null:
-			if target.is_in_group("enemy") and target.has_method("enemy_hit"):
-				target.enemy_hit(damage)
